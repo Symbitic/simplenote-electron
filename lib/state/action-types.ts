@@ -118,7 +118,7 @@ export type SystemThemeUpdate = Action<
   'SYSTEM_THEME_UPDATE',
   { prefers: 'light' | 'dark' }
 >;
-export type TagToTrash = Action<'TAG_TO_TRASH'>;
+export type TagToTrash = Action<'TAG_TO_TRASH', { tagName: T.TagName }>;
 export type ToggleAnalytics = Action<'TOGGLE_ANALYTICS'>;
 export type ToggleAutoHideMenuBar = Action<'TOGGLE_AUTO_HIDE_MENU_BAR'>;
 export type ToggleEditMode = Action<'TOGGLE_EDIT_MODE'>;

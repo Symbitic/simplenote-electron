@@ -326,8 +326,9 @@ const tagSuggestions: A.Reducer<T.TagHash[]> = (
 const tagToTrash: A.Reducer<T.TagName | ''> = (state = '', action) => {
   switch (action.type) {
     case 'TAG_TO_TRASH':
-      console.log(state);
-      return state;
+      return action.tagName;
+    case 'TRASH_TAG':
+      return '';
     default:
       return '';
   }

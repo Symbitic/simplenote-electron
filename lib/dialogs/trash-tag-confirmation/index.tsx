@@ -29,12 +29,12 @@ const TrashTagConfirmation: FunctionComponent<Props> = ({
     onDone={closeDialog}
     title="Delete Tag"
   >
-    <div>Are you sure you want to delete this tag, {tagToTrash}?</div>
+    <div>Are you sure you want to delete this tag?</div>
     <button
       className="button-primary delete-tag"
       onClick={() => {
-        //trashTag(tagToTrash);
-        console.log('delete');
+        trashTag(tagToTrash);
+        closeDialog();
       }}
     >
       Delete
