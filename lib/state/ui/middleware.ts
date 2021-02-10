@@ -1,6 +1,6 @@
 import * as A from '../action-types';
 import * as S from '../';
-import noteExportToZip from 'lib/utils/export/to-zip';
+
 import { showDialog } from './actions';
 
 export const middleware: S.Middleware = (store) => (
