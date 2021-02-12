@@ -1,15 +1,14 @@
-import actions from 'lib/state/actions';
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { closeDialog, tagToTrash } from '../../../lib/state/ui/actions';
+import actions from '../../state/actions';
 import Dialog from '../../dialog';
 
 import type * as S from '../../state';
 import type * as T from '../../types';
 
-type StateProps = {
-  tagToTrash: T.TagName;
+type OwnProps = {
+  tagName: T.TagName;
 };
 
 type DispatchProps = {
@@ -17,11 +16,11 @@ type DispatchProps = {
   trashTag: (tagName: T.TagName) => any;
 };
 
-type Props = StateProps & DispatchProps;
+type Props = OwnProps & DispatchProps;
 
 const TrashTagConfirmation: FunctionComponent<Props> = ({
   closeDialog,
-  tagToTrash,
+  tagName,
   trashTag,
 }) => (
   <Dialog
@@ -33,7 +32,7 @@ const TrashTagConfirmation: FunctionComponent<Props> = ({
     <button
       className="button-primary delete-tag"
       onClick={() => {
-        trashTag(tagToTrash);
+        trashTag(tagName);
         closeDialog();
       }}
     >
@@ -42,19 +41,12 @@ const TrashTagConfirmation: FunctionComponent<Props> = ({
   </Dialog>
 );
 
-const mapStateToProps: S.MapState<StateProps> = (state) => ({
-  tagToTrash: state.ui.tagToTrash,
-});
-
 const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
   trashTag: (tagName) => ({
     type: 'TRASH_TAG',
     tagName,
   }),
-  closeDialog: closeDialog,
+  closeDialog: actions.ui.closeDialog,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TrashTagConfirmation);
+export default connect(null, mapDispatchToProps)(TrashTagConfirmation);

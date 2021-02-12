@@ -201,7 +201,7 @@ const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
   deleteNoteForever: actions.ui.deleteOpenNoteForever,
   newNote: actions.ui.createNote,
   restoreNote: actions.ui.restoreOpenNote,
-  shareNote: () => actions.ui.showDialog('SHARE'),
+  shareNote: () => actions.ui.showDialog({ type: 'SHARE' }),
   toggleEditMode: actions.ui.toggleEditMode,
   toggleFocusMode: actions.settings.toggleFocusMode,
   toggleNoteInfo: actions.ui.toggleNoteInfo,

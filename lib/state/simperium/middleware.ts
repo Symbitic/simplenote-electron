@@ -454,7 +454,7 @@ export const initSimperium = (
         if (changes.notes.length > 0) {
           store.dispatch({
             type: 'SHOW_DIALOG',
-            dialog: 'LOGOUT-CONFIRMATION',
+            dialog: { type: 'LOGOUT-CONFIRMATION' },
           });
           return result;
         }

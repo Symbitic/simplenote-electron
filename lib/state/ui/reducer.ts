@@ -274,7 +274,7 @@ const showNavigation: A.Reducer<boolean> = (state = false, action) => {
     case 'SHOW_ALL_NOTES':
       return false;
     case 'SHOW_DIALOG':
-      if (action.dialog === 'SETTINGS') {
+      if (action.dialog.type === 'SETTINGS') {
         return false;
       }
       return state;
@@ -323,17 +323,6 @@ const tagSuggestions: A.Reducer<T.TagHash[]> = (
   return action.meta.searchResults.tagHashes;
 };
 
-const tagToTrash: A.Reducer<T.TagName | ''> = (state = '', action) => {
-  switch (action.type) {
-    case 'TAG_TO_TRASH':
-      return action.tagName;
-    case 'TRASH_TAG':
-      return '';
-    default:
-      return '';
-  }
-};
-
 export default combineReducers({
   dialogs,
   editMode,
@@ -354,6 +343,5 @@ export default combineReducers({
   showTrash,
   simperiumConnected,
   tagSuggestions,
-  tagToTrash,
   unsyncedNoteIds,
 });

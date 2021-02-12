@@ -7,7 +7,7 @@ const about = {
   label: '&About ' + app.name,
   click: appCommandSender({
     action: 'showDialog',
-    dialog: 'ABOUT',
+    dialog: { type: 'ABOUT' },
   }),
 };
 
@@ -31,7 +31,7 @@ const preferences = (isAuthenticated) => {
     accelerator: 'CommandOrControl+,',
     click: appCommandSender({
       action: 'showDialog',
-      dialog: 'SETTINGS',
+      dialog: { type: 'SETTINGS' },
     }),
   };
 };

@@ -140,13 +140,6 @@ export const toggleTagEditing: A.ActionCreator<A.ToggleTagEditing> = () => ({
   type: 'TAG_EDITING_TOGGLE',
 });
 
-export const tagToTrash: A.ActionCreator<A.TagToTrash> = (
-  tagName: T.TagName
-) => ({
-  type: 'TAG_TO_TRASH',
-  tagName,
-});
-
 export const trashOpenNote: A.ActionCreator<A.TrashOpenNote> = () => ({
   type: 'TRASH_OPEN_NOTE',
 });

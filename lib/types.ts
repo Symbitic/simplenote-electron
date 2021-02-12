@@ -59,15 +59,18 @@ export type ConnectionState = 'green' | 'red' | 'offline';
 // Application Types
 ///////////////////////////////////////
 export type DialogType =
-  | 'ABOUT'
-  | 'BETA-WARNING'
-  | 'CLOSE-WINDOW-CONFIRMATION'
-  | 'IMPORT'
-  | 'KEYBINDINGS'
-  | 'LOGOUT-CONFIRMATION'
-  | 'SETTINGS'
-  | 'SHARE'
-  | 'TRASH-TAG-CONFIRMATION';
+  | { type: 'ABOUT' }
+  | { type: 'BETA-WARNING' }
+  | { type: 'CLOSE-WINDOW-CONFIRMATION' }
+  | { type: 'IMPORT' }
+  | { type: 'KEYBINDINGS' }
+  | { type: 'LOGOUT-CONFIRMATION' }
+  | { type: 'SETTINGS' }
+  | { type: 'SHARE' }
+  | {
+      type: 'TRASH-TAG-CONFIRMATION';
+      tagName: TagName;
+    };
 export type LineLength = 'full' | 'narrow';
 export type ListDisplayMode = 'expanded' | 'comfy' | 'condensed';
 export type SortType = 'alphabetical' | 'creationDate' | 'modificationDate';

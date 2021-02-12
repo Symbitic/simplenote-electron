@@ -37,37 +37,39 @@ export class DialogRenderer extends Component<Props> {
 
   render() {
     const { theme, closeDialog } = this.props;
-
     return (
       <Fragment>
         {this.props.dialogs.map((dialog) => (
           <Modal
-            key={dialog}
+            key={dialog.type}
             className="dialog-renderer__content"
-            contentLabel={dialog}
+            contentLabel={dialog.type}
             isOpen
             onRequestClose={closeDialog}
             overlayClassName="dialog-renderer__overlay"
             portalClassName={`dialog-renderer__portal theme-${theme}`}
           >
-            {'ABOUT' === dialog ? (
+            {'ABOUT' === dialog.type ? (
               <AboutDialog key="about" closeDialog={closeDialog} />
-            ) : 'BETA-WARNING' === dialog ? (
+            ) : 'BETA-WARNING' === dialog.type ? (
               <BetaWarning key="beta-warning" />
-            ) : 'CLOSE-WINDOW-CONFIRMATION' === dialog ? (
+            ) : 'CLOSE-WINDOW-CONFIRMATION' === dialog.type ? (
               <CloseWindowConfirmation key="close-window-confirmation" />
-            ) : 'IMPORT' === dialog ? (
+            ) : 'IMPORT' === dialog.type ? (
               <ImportDialog key="import" />
-            ) : 'KEYBINDINGS' === dialog ? (
+            ) : 'KEYBINDINGS' === dialog.type ? (
               <KeybindingsDialog key="keybindings" />
-            ) : 'LOGOUT-CONFIRMATION' === dialog ? (
+            ) : 'LOGOUT-CONFIRMATION' === dialog.type ? (
               <LogoutConfirmation key="logout-confirmation" />
-            ) : 'SETTINGS' === dialog ? (
+            ) : 'SETTINGS' === dialog.type ? (
               <SettingsDialog key="settings" />
-            ) : 'SHARE' === dialog ? (
+            ) : 'SHARE' === dialog.type ? (
               <ShareDialog key="share" />
-            ) : 'TRASH-TAG-CONFIRMATION' === dialog ? (
-              <TrashTagConfirmation key="trash-tag-confirmation" />
+            ) : 'TRASH-TAG-CONFIRMATION' === dialog.type ? (
+              <TrashTagConfirmation
+                key="trash-tag-confirmation"
+                tagName={dialog.tagName}
+              />
             ) : null}
           </Modal>
         ))}

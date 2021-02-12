@@ -136,12 +136,12 @@ const mapStateToProps: S.MapState<StateProps> = ({
 });
 
 const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
-  onAbout: () => actions.ui.showDialog('ABOUT'),
+  onAbout: () => actions.ui.showDialog({ type: 'ABOUT' }),
   onOutsideClick: actions.ui.toggleNavigation,
   onShowAllNotes: actions.ui.showAllNotes,
-  onSettings: () => actions.ui.showDialog('SETTINGS'),
+  onSettings: () => actions.ui.showDialog({ type: 'SETTINGS' }),
   selectTrash: actions.ui.selectTrash,
-  showKeyboardShortcuts: () => actions.ui.showDialog('KEYBINDINGS'),
+  showKeyboardShortcuts: () => actions.ui.showDialog({ type: 'KEYBINDINGS' }),
 };
 
 export default connect(

@@ -144,7 +144,9 @@ export class AppLayout extends Component<Props> {
 const mapStateToProps: S.MapState<StateProps> = (state) => ({
   hasRevisions:
     state.ui.showRevisions && state.data.noteRevisions.has(state.ui.openedNote),
-  keyboardShortcutsAreOpen: state.ui.dialogs.includes('KEYBINDINGS'),
+  keyboardShortcutsAreOpen:
+    state.ui.dialogs.find((element) => element.type === 'KEYBINDINGS') !==
+    undefined,
   keyboardShortcuts: state.settings.keyboardShortcuts,
   isFocusMode: state.settings.focusModeEnabled,
   isNavigationOpen: state.ui.showNavigation,
@@ -165,7 +167,7 @@ const mapStateToProps: S.MapState<StateProps> = (state) => ({
 
 const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
   hideKeyboardShortcuts: () => actions.ui.closeDialog('KEYBINDINGS'),
-  showKeyboardShortcuts: () => actions.ui.showDialog('KEYBINDINGS'),
+  showKeyboardShortcuts: () => actions.ui.showDialog({ type: 'KEYBINDINGS' }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppLayout);

@@ -1,8 +1,6 @@
 import * as A from '../action-types';
 import * as S from '../';
 
-import { showDialog } from './actions';
-
 export const middleware: S.Middleware = (store) => (
   next: (action: A.ActionType) => any
 ) => (action: A.ActionType) => {
@@ -91,10 +89,6 @@ export const middleware: S.Middleware = (store) => (
           response.then(finisher);
         }
       }
-      return next(action);
-
-    case 'TAG_TO_TRASH':
-      store.dispatch(showDialog('TRASH-TAG-CONFIRMATION'));
       return next(action);
 
     default:

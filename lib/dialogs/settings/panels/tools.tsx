@@ -92,7 +92,7 @@ const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
     type: 'REQUEST_NOTIFICATIONS',
     sendNotifications,
   }),
-  showImportDialog: () => showDialog('IMPORT'),
+  showImportDialog: () => showDialog({ type: 'IMPORT' }),
   toggleShortcuts: () => actions.settings.toggleKeyboardShortcuts(),
 };
 
