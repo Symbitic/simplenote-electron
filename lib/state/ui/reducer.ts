@@ -89,6 +89,7 @@ const editorSelection: A.Reducer<Map<
 const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
   switch (action.type) {
     case 'CLOSE_DIALOG':
+    case 'TRASH_TAG':
       return state.slice(0, -1);
 
     case 'SHOW_DIALOG':
