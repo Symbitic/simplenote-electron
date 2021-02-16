@@ -18,7 +18,7 @@ const buildFileMenu = (isAuthenticated) => {
       visible: isAuthenticated,
       click: appCommandSender({
         action: 'showDialog',
-        dialog: { type: 'IMPORT' },
+        dialog: 'IMPORT',
       }),
     },
     {

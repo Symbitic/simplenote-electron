@@ -167,7 +167,7 @@ const mapStateToProps: S.MapState<StateProps> = (state) => ({
 
 const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
   hideKeyboardShortcuts: () => actions.ui.closeDialog('KEYBINDINGS'),
-  showKeyboardShortcuts: () => actions.ui.showDialog({ type: 'KEYBINDINGS' }),
+  showKeyboardShortcuts: () => actions.ui.showDialog('KEYBINDINGS'),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppLayout);

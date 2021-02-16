@@ -21,7 +21,7 @@ const buildHelpMenu = (mainWindow, isAuthenticated) => {
       visible: isAuthenticated,
       click: appCommandSender({
         action: 'showDialog',
-        dialog: { type: 'KEYBINDINGS' },
+        dialog: 'KEYBINDINGS',
       }),
     },
     { type: 'separator' },

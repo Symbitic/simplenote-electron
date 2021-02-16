@@ -101,7 +101,13 @@ export type SetUnsyncedNoteIds = Action<
   { noteIds: T.EntityId[] }
 >;
 export type ShowAllNotes = Action<'SHOW_ALL_NOTES'>;
-export type ShowDialog = Action<'SHOW_DIALOG', { dialog: T.DialogType }>;
+export type ShowDialog = Action<
+  'SHOW_DIALOG',
+  {
+    dialogName: T.DialogType['type'];
+    dialogData: object;
+  }
+>;
 export type StoreEditorSelection = Action<
   'STORE_EDITOR_SELECTION',
   { noteId: T.EntityId; start: number; end: number; direction: 'RTL' | 'LTR' }

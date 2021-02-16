@@ -213,8 +213,7 @@ const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
     newIndex,
   }),
   trashTag: (tagName) =>
-    showDialog({
-      type: 'TRASH-TAG-CONFIRMATION',
+    showDialog('TRASH-TAG-CONFIRMATION', {
       tagName,
     }),
 };

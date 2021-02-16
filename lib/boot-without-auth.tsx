@@ -50,7 +50,7 @@ class AppWithoutAuth extends Component<Props, State> {
   }
 
   onAppCommand = (event) => {
-    if ('showDialog' === event.action && 'ABOUT' === event.dialog.type) {
+    if ('showDialog' === event.action && 'ABOUT' === event.dialog) {
       this.setState({ showAbout: true });
     }
   };

@@ -26,7 +26,7 @@ export const EmailToolTip: FunctionComponent<Props> = ({ openShareDialog }) => (
 );
 
 const mapDispatchToProps: S.MapDispatch<DispatchProps> = (dispatch) => ({
-  openShareDialog: () => dispatch(showDialog({ type: 'SHARE' })),
+  openShareDialog: () => dispatch(showDialog('SHARE')),
 });
 
 export default connect(null, mapDispatchToProps)(EmailToolTip);

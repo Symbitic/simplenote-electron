@@ -28,7 +28,7 @@ const TrashTagConfirmation: FunctionComponent<Props> = ({
     onDone={closeDialog}
     title="Delete Tag"
   >
-    <div>Are you sure you want to delete this tag?</div>
+    <div>Are you sure you want to delete the tag &quot;{tagName}&quot;?</div>
     <button
       className="button-primary delete-tag"
       onClick={() => trashTag(tagName)}

@@ -436,7 +436,7 @@ export const initSimperium = (
         if (changes.notes.length > 0) {
           store.dispatch({
             type: 'SHOW_DIALOG',
-            dialog: 'CLOSE-WINDOW-CONFIRMATION',
+            dialogName: 'CLOSE-WINDOW-CONFIRMATION',
           });
           return result;
         }
@@ -454,7 +454,7 @@ export const initSimperium = (
         if (changes.notes.length > 0) {
           store.dispatch({
             type: 'SHOW_DIALOG',
-            dialog: { type: 'LOGOUT-CONFIRMATION' },
+            dialogName: 'LOGOUT-CONFIRMATION',
           });
           return result;
         }

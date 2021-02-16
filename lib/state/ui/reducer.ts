@@ -91,12 +91,19 @@ const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
     case 'CLOSE_DIALOG':
       return state.slice(0, -1);
     case 'TRASH_TAG':
-    case 'REMOTE_TAG_DELETE':
       return state.filter(
         (element) => element.type !== 'TRASH-TAG-CONFIRMATION'
       );
+    case 'REMOTE_TAG_DELETE':
+      return state.filter(
+        (element) =>
+          element.tagName !== tagHashOf(action.tagHash) ||
+          element.type !== 'TRASH-TAG-CONFIRMATION'
+      );
     case 'SHOW_DIALOG':
-      return state.includes(action.dialog) ? state : [...state, action.dialog];
+      return state.find((element) => element.type === action.dialogName)
+        ? state
+        : [...state, { type: action.dialogName, tagName: action.tagName }];
 
     default:
       return state;
@@ -278,7 +285,7 @@ const showNavigation: A.Reducer<boolean> = (state = false, action) => {
     case 'SHOW_ALL_NOTES':
       return false;
     case 'SHOW_DIALOG':
-      if (action.dialog.type === 'SETTINGS') {
+      if (action.dialogName === 'SETTINGS') {
         return false;
       }
       return state;
