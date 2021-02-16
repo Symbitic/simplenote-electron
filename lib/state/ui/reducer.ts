@@ -89,9 +89,12 @@ const editorSelection: A.Reducer<Map<
 const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
   switch (action.type) {
     case 'CLOSE_DIALOG':
-    case 'TRASH_TAG':
       return state.slice(0, -1);
-
+    case 'TRASH_TAG':
+    case 'REMOTE_TAG_DELETE':
+      return state.filter(
+        (element) => element.type !== 'TRASH-TAG-CONFIRMATION'
+      );
     case 'SHOW_DIALOG':
       return state.includes(action.dialog) ? state : [...state, action.dialog];
 
