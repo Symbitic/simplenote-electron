@@ -98,8 +98,8 @@ const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
       return state.filter(
         (element) =>
           !(
-            element.type !== 'TRASH-TAG-CONFIRMATION' &&
-            element.tagName !== tagHashOf(action.tagHash)
+            element.type === 'TRASH-TAG-CONFIRMATION' &&
+            tagHashOf(element.tagName) === action.tagHash
           )
       );
     case 'SHOW_DIALOG':
