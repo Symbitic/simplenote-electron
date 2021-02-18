@@ -97,8 +97,10 @@ const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
     case 'REMOTE_TAG_DELETE':
       return state.filter(
         (element) =>
-          element.tagName !== tagHashOf(action.tagHash) ||
-          element.type !== 'TRASH-TAG-CONFIRMATION'
+          !(
+            element.type !== 'TRASH-TAG-CONFIRMATION' &&
+            element.tagName !== tagHashOf(action.tagHash)
+          )
       );
     case 'SHOW_DIALOG':
       return state.find((element) => element.type === action.name)
