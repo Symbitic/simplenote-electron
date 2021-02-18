@@ -135,7 +135,7 @@ export const middleware: S.Middleware = (store) => {
         record('user_signed_in');
         break;
       case 'SHOW_DIALOG':
-        if (action.dialogName === 'SHARE') {
+        if (action.name === 'SHARE') {
           record('editor_share_dialog_viewed');
         }
         break;

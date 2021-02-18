@@ -101,9 +101,9 @@ const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
           element.type !== 'TRASH-TAG-CONFIRMATION'
       );
     case 'SHOW_DIALOG':
-      return state.find((element) => element.type === action.dialogName)
+      return state.find((element) => element.type === action.name)
         ? state
-        : [...state, { type: action.dialogName, tagName: action.tagName }];
+        : [...state, { type: action.name, tagName: action.tagName }];
 
     default:
       return state;
@@ -285,7 +285,7 @@ const showNavigation: A.Reducer<boolean> = (state = false, action) => {
     case 'SHOW_ALL_NOTES':
       return false;
     case 'SHOW_DIALOG':
-      if (action.dialogName === 'SETTINGS') {
+      if (action.name === 'SETTINGS') {
         return false;
       }
       return state;

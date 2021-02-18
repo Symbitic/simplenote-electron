@@ -87,12 +87,12 @@ export const showAllNotes: A.ActionCreator<A.ShowAllNotes> = () => ({
 export const showDialog: A.ActionCreator<A.ShowDialog> = <
   D extends T.DialogType
 >(
-  dialogName: D['type'],
-  dialogData: object = {}
+  name: D['type'],
+  data: object = {}
 ): A.ShowDialog => ({
   type: 'SHOW_DIALOG',
-  dialogName,
-  ...dialogData,
+  name,
+  ...data,
 });
 
 export const storeRevisions: A.ActionCreator<A.StoreRevisions> = (
