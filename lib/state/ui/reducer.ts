@@ -91,19 +91,18 @@ const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
     case 'CLOSE_DIALOG':
       return state.slice(0, -1);
     case 'TRASH_TAG':
-      return state.filter(
-        (element) => element.type !== 'TRASH-TAG-CONFIRMATION'
-      );
+      return state.filter((dialog) => dialog.type !== 'TRASH-TAG-CONFIRMATION');
     case 'REMOTE_TAG_DELETE':
       return state.filter(
-        (element) =>
+        (dialog) =>
           !(
-            element.type === 'TRASH-TAG-CONFIRMATION' &&
-            tagHashOf(element.tagName) === action.tagHash
+            dialog.type === 'TRASH-TAG-CONFIRMATION' &&
+            tagHashOf(dialog.tagName) === action.tagHash
           )
       );
     case 'SHOW_DIALOG':
-      return state.find((element) => element.type === action.name)
+      // This ensures we only show one dialog of each type at a time.
+      return state.find((dialog) => dialog.type === action.name)
         ? state
         : [...state, { type: action.name, tagName: action.tagName }];
 

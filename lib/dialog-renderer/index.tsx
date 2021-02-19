@@ -36,10 +36,10 @@ export class DialogRenderer extends Component<Props> {
   static displayName = 'DialogRenderer';
 
   render() {
-    const { theme, closeDialog } = this.props;
+    const { theme, closeDialog, dialogs } = this.props;
     return (
       <Fragment>
-        {this.props.dialogs.map((dialog) => (
+        {dialogs.map((dialog) => (
           <Modal
             key={dialog.type}
             className="dialog-renderer__content"
