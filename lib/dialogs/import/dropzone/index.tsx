@@ -2,7 +2,7 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import GridiconUpload from 'gridicons/dist/cloud-upload';
+import CloudIcon from '../../../icons/cloud';
 import GridiconWarn from 'gridicons/dist/notice-outline';
 import FileIcon from '../../../icons/file';
 import { useDropzone } from 'react-dropzone';
@@ -57,11 +57,13 @@ function ImporterDropzone({
     return () => clearTimeout(timer);
   }, [errorMessage]);
 
-  const text = errorMessage ? errorMessage : 'Drag a file, or click to choose';
+  const text = errorMessage
+    ? errorMessage
+    : 'Drag and drop to upload files, or click to choose';
 
   const DropzonePlaceholder = () => (
     <Fragment>
-      {errorMessage ? <GridiconWarn /> : <GridiconUpload />}
+      {errorMessage ? <GridiconWarn /> : <CloudIcon />}
       {isDragActive ? 'Drop files here' : text}
     </Fragment>
   );

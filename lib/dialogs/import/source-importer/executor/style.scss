@@ -8,10 +8,18 @@
 .source-importer-executor__options {
   flex: 1 0 auto;
   padding-top: 2em;
-}
 
-.source-importer-executor__checkbox {
-  margin-right: 6px;
+  label {
+    display: flex;
+  }
+
+  .enable-markdown {
+    flex: 1 1 auto;
+  }
+
+  .toggle-control {
+    flex: none;
+  }
 }
 
 .source-importer-executor__error {
@@ -21,9 +29,8 @@
 }
 
 .source-importer-executor__button {
-  margin-top: 1em;
-
   button {
-    width: 100%;
+    display: block;
+    margin: 30px 0 0 auto;
   }
 }

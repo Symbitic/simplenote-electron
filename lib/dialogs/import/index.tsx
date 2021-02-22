@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
 
 import Dialog from '../../dialog';
+import { isElectron } from '../../utils/platform';
 import SourceImporter from './source-importer';
 import { closeDialog } from '../../state/ui/actions';
 
@@ -21,12 +22,15 @@ class ImportDialog extends Component<Props> {
   render() {
     const { closeDialog } = this.props;
     const { importStarted } = this.state;
+    const instructions = isElectron
+      ? 'Choose a simplenote export file (.json), an Evernote export file (.enex), or one or more text files (.txt, .md).'
+      : 'Choose a simplenote export file (.json), or one or more text files (.txt, .md).';
+    const acceptedTypes = isElectron ? '.txt,.md,.enex' : '.txt,.md';
     const source = {
       name: 'Note Importer',
       slug: 'plaintext',
-      acceptedTypes: '.txt,.md',
-      instructions:
-        'Choose a simplenote export file (.json) or one or more text files (txt, md).',
+      acceptedTypes: acceptedTypes,
+      instructions: instructions,
       multiple: true,
     };
 

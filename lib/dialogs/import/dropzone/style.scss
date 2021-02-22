@@ -6,8 +6,8 @@
   padding: 24px;
   border-width: 2px;
   border-style: dashed;
-  background: $studio-simplenote-blue-5;
   transition: padding 0.2s ease-out, background 0.2s ease-out;
+  text-align: center;
 
   &:focus-within {
     overflow: hidden;

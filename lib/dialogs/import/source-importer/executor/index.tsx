@@ -5,6 +5,7 @@ import { throttle } from 'lodash';
 import actions from '../../../../state/actions';
 
 import PanelTitle from '../../../../components/panel-title';
+import ToggleControl from '../../../../controls/toggle';
 import TransitionFadeInOut from '../../../../components/transition-fade-in-out';
 import ImportProgress from '../progress';
 
@@ -131,14 +132,14 @@ class ImportExecutor extends Component<Props> {
         <section className="source-importer-executor__options">
           <PanelTitle headingLevel={3}>Options</PanelTitle>
           <label>
-            <input
-              type="checkbox"
-              checked={setMarkdown}
+            <div className="enable-markdown">Enable Markdown on all notes</div>
+            <ToggleControl
+              id="source-importer-executor__checkbox"
               className="source-importer-executor__checkbox"
-              disabled={locked}
               onChange={() => this.setState({ setMarkdown: !setMarkdown })}
+              checked={setMarkdown}
+              disabled={locked}
             />
-            Enable Markdown on all notes
           </label>
           {hint && <p className="theme-color-fg-dim">{hint}</p>}
         </section>
