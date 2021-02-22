@@ -100,11 +100,13 @@ const dialogs: A.Reducer<T.DialogType[]> = (state = [], action) => {
             tagHashOf(dialog.tagName) === action.tagHash
           )
       );
-    case 'SHOW_DIALOG':
+    case 'SHOW_DIALOG': {
+      const { type, name, ...data } = action;
       // This ensures we only show one dialog of each type at a time.
-      return state.find((dialog) => dialog.type === action.name)
+      return state.find((dialog) => dialog.type === name)
         ? state
-        : [...state, { type: action.name, tagName: action.tagName }];
+        : [...state, { type: name, ...data }];
+    }
 
     default:
       return state;

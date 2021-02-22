@@ -105,7 +105,7 @@ export type ShowDialog = Action<
   'SHOW_DIALOG',
   {
     name: T.DialogType['type'];
-    data: object;
+    data?: object;
   }
 >;
 export type StoreEditorSelection = Action<

@@ -46,5 +46,5 @@ export const shouldShowEmailVerification: S.Selector<boolean> = ({
   data: { accountVerification: status },
 }) => status === 'unverified' || status === 'pending';
 
-export const isDialogOpen = (state: S.State, name: T.DialogType) =>
+export const isDialogOpen = (state: S.State, name: T.DialogType['type']) =>
   state.ui.dialogs.find(({ type }) => type === name) !== undefined;
