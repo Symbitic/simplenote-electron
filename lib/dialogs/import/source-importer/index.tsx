@@ -33,6 +33,9 @@ class SourceImporter extends React.Component {
     return (
       <div className="source-importer">
         <PanelTitle headingLevel="3">Import file{multiple && 's'}</PanelTitle>
+        {!hasAcceptedFile && (
+          <p className="theme-color-fg-dim">{instructions}</p>
+        )}
         <ImporterDropzone
           acceptedTypes={acceptedTypes}
           locked={locked}
@@ -40,9 +43,7 @@ class SourceImporter extends React.Component {
           onAccept={(files) => this.setState({ acceptedFiles: files })}
           onReset={() => this.setState({ acceptedFiles: undefined })}
         />
-        {!hasAcceptedFile && (
-          <p className="theme-color-fg-dim">{instructions}</p>
-        )}
+
         <TransitionFadeInOut
           wrapperClassName="source-importer__executor-wrapper"
           shouldMount={hasAcceptedFile}
