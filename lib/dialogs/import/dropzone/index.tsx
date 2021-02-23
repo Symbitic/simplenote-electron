@@ -16,6 +16,7 @@ function ImporterDropzone({
 }) {
   const [acceptedFile, setAcceptedFile] = useState();
   const [errorMessage, setErrorMessage] = useState();
+  const [tooManyFiles, setTooManyFiles] = useState();
 
   const handleAccept = (acceptedFiles) => {
     let hasSimplenote = 0;
@@ -30,19 +31,25 @@ function ImporterDropzone({
       if (fileExtension === 'json') {
         if (hasSimplenote === 0) {
           filteredFiles.push(file);
+        } else {
+          setTooManyFiles(
+            'Only one Simplenote file (.json) can be imported at a time.'
+          );
         }
         hasSimplenote++;
       } else if (fileExtension === 'enex') {
         if (hasEvernote === 0) {
           filteredFiles.push(file);
+        } else {
+          setTooManyFiles(
+            'Only one Evernote file (.enex) can be imported at a time.'
+          );
         }
         hasEvernote++;
       } else {
         filteredFiles.push(file);
       }
     }
-    //const fileCount = filteredFiles.length;
-    //const label = fileCount > 1 ? `${fileCount} files` : filteredFiles[0].name;
 
     setAcceptedFile(filteredFiles);
     onAccept(filteredFiles);
@@ -81,6 +88,14 @@ function ImporterDropzone({
     return () => clearTimeout(timer);
   }, [errorMessage]);
 
+  useEffect(() => {
+    if (!tooManyFiles) {
+      return;
+    }
+    const timer = setTimeout(() => setTooManyFiles(undefined), 5000);
+    return () => clearTimeout(timer);
+  }, [tooManyFiles]);
+
   const text = errorMessage
     ? errorMessage
     : 'Drag and drop to upload files, or click to choose';
@@ -105,6 +120,12 @@ function ImporterDropzone({
           Import File{acceptedFile.length > 1 ? 's' : ''}
         </div>
         <ul className="accepted-files">{fileList}</ul>
+        {tooManyFiles && (
+          <div className="error-message">
+            <GridiconWarn />
+            {tooManyFiles}
+          </div>
+        )}
       </Fragment>
     );
   };
