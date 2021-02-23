@@ -22,7 +22,7 @@ function ImporterDropzone({
     let hasSimplenote = 0;
     let hasEvernote = 0;
 
-    let filteredFiles = [];
+    const filteredFiles = [];
     for (let i = 0; i < acceptedFiles.length; i++) {
       const file = acceptedFiles[i];
       const fileExtension =
