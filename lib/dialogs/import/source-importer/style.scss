@@ -7,10 +7,41 @@
 
 .source-importer {
   button.disabled {
-    margin: 30px 0 0 auto;
+    margin: 24px 24px 24px auto;
   }
 
-  .importer-dropzone.is-accepted + button {
-    display: none;
+  .importer-dropzone {
+    margin-left: 24px;
+    margin-right: 24px;
+
+    &.is-accepted + button {
+      display: none;
+    }
+
+    &.is-accepted {
+      margin-left: 0;
+      margin-right: 0;
+
+      .accepted-files-header,
+      .accepted-files {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+  }
+  p.theme-color-fg-dim {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .source-importer-executor {
+    h3,
+    label {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+  .source-importer-executor__button button {
+    margin: 24px 24px 24px auto;
   }
 }

@@ -18,10 +18,34 @@ function ImporterDropzone({
   const [errorMessage, setErrorMessage] = useState();
 
   const handleAccept = (acceptedFiles) => {
-    const fileCount = acceptedFiles.length;
-    const label = fileCount > 1 ? `${fileCount} files` : acceptedFiles[0].name;
-    setAcceptedFile(label);
-    onAccept(acceptedFiles);
+    let hasSimplenote = 0;
+    let hasEvernote = 0;
+
+    let filteredFiles = [];
+    for (let i = 0; i < acceptedFiles.length; i++) {
+      const file = acceptedFiles[i];
+      const fileExtension =
+        file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length) ||
+        file.name;
+      if (fileExtension === 'json') {
+        if (hasSimplenote === 0) {
+          filteredFiles.push(file);
+        }
+        hasSimplenote++;
+      } else if (fileExtension === 'enex') {
+        if (hasEvernote === 0) {
+          filteredFiles.push(file);
+        }
+        hasEvernote++;
+      } else {
+        filteredFiles.push(file);
+      }
+    }
+    //const fileCount = filteredFiles.length;
+    //const label = fileCount > 1 ? `${fileCount} files` : filteredFiles[0].name;
+
+    setAcceptedFile(filteredFiles);
+    onAccept(filteredFiles);
   };
 
   const handleReject = (rejectedFiles) => {
@@ -68,12 +92,22 @@ function ImporterDropzone({
     </Fragment>
   );
 
-  const FileWithIcon = () => (
-    <Fragment>
-      <FileIcon />
-      <span className="importer-dropzone__filename">{acceptedFile}</span>
-    </Fragment>
-  );
+  const FilesWithIcon = () => {
+    const fileList = acceptedFile.map((file: File) => (
+      <li key={file.name}>
+        <FileIcon />
+        {file.name}
+      </li>
+    ));
+    return (
+      <Fragment>
+        <div className="accepted-files-header">
+          Import File{acceptedFile.length > 1 ? 's' : ''}
+        </div>
+        <ul className="accepted-files">{fileList}</ul>
+      </Fragment>
+    );
+  };
 
   return (
     <div
@@ -84,7 +118,7 @@ function ImporterDropzone({
       )}
     >
       <input {...getInputProps()} />
-      {acceptedFile ? <FileWithIcon /> : <DropzonePlaceholder />}
+      {acceptedFile ? <FilesWithIcon /> : <DropzonePlaceholder />}
     </div>
   );
 }

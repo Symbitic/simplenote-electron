@@ -11,7 +11,7 @@
 
   &:focus-within {
     overflow: hidden;
-    outline: $focus-outline;
+    outline: none;
   }
 
   @at-root .theme-dark & {
@@ -23,15 +23,32 @@
   }
 
   &.is-accepted {
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 14px 18px;
-    border-width: 1px;
-    border-style: solid;
+    display: block;
+    padding: 0;
+    border-width: 0;
     background: transparent;
+    text-align: left;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+
+    li {
+      line-height: 28px;
+      margin-left: 0;
+      padding-left: 0;
+      height: 28px;
+      vertical-align: middle;
+      display: inline-block;
+      width: 100%;
+    }
 
     svg {
-      margin-right: 8px;
+      height: 17px;
     }
   }
 }
