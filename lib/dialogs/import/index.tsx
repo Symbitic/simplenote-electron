@@ -23,12 +23,14 @@ class ImportDialog extends Component<Props> {
     const { closeDialog } = this.props;
     const { importStarted } = this.state;
     const instructions = isElectron
-      ? 'Choose a simplenote export file (.json), an Evernote export file (.enex), or one or more text files (.txt, .md).'
-      : 'Choose a simplenote export file (.json), or one or more text files (.txt, .md).';
-    const acceptedTypes = isElectron ? '.txt,.md,.enex' : '.txt,.md';
+      ? 'Choose a Simplenote export file (.json), one or more text files (.txt, .md), or an Evernote export file (.enex).'
+      : 'Choose a Simplenote export file (.json) or one or more text files (.txt, .md).';
+    const acceptedTypes = isElectron
+      ? '.txt,.md,.json,.enex'
+      : '.txt,.md,.json';
     const source = {
       name: 'Note Importer',
-      slug: 'plaintext',
+      slug: 'multiple',
       acceptedTypes: acceptedTypes,
       instructions: instructions,
       multiple: true,

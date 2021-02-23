@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import CloudIcon from '../../../icons/cloud';
-import GridiconWarn from 'gridicons/dist/notice-outline';
+import GridiconWarn from '../../../icons/warning';
 import FileIcon from '../../../icons/file';
 import { useDropzone } from 'react-dropzone';
 
