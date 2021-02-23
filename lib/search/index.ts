@@ -30,6 +30,7 @@ type SearchState = {
   searchTags: Set<T.TagHash>;
   searchTerms: string[];
   showTrash: boolean;
+  showUntagged: boolean;
   sortType: T.SortType;
   sortReversed: boolean;
   titleOnly: boolean | null;
@@ -70,6 +71,7 @@ export const middleware: S.Middleware = (store) => {
     searchTags: new Set(),
     searchTerms: [],
     showTrash: false,
+    showUntagged: false,
     sortType: store.getState().settings.sortType,
     sortReversed: store.getState().settings.sortReversed,
     titleOnly: false,
@@ -186,6 +188,7 @@ export const middleware: S.Middleware = (store) => {
       sortReversed,
       sortType,
       showTrash,
+      showUntagged,
       titleOnly,
     } = { ...searchState, ...args };
     const matches = new Set<T.EntityId>();
@@ -226,6 +229,10 @@ export const middleware: S.Middleware = (store) => {
         }
       }
       if (!hasAllTags) {
+        continue;
+      }
+
+      if (showUntagged && note.tags.size) {
         continue;
       }
 
@@ -350,6 +357,7 @@ export const middleware: S.Middleware = (store) => {
       return rawNext(action);
     };
 
+    searchState.showUntagged = false;
     switch (action.type) {
       case 'ADD_NOTE_TAG': {
         const note = searchState.notes.get(action.noteId);
@@ -408,6 +416,7 @@ export const middleware: S.Middleware = (store) => {
 
       case 'OPEN_TAG':
         searchState.openedTag = t(action.tagName);
+        searchState.showTrash = false;
         return next(withSearch(action));
 
       case 'PIN_NOTE': {
@@ -479,6 +488,12 @@ export const middleware: S.Middleware = (store) => {
       case 'SHOW_ALL_NOTES':
         searchState.openedTag = null;
         searchState.showTrash = false;
+        return next(withSearch(action));
+
+      case 'SHOW_UNTAGGED_NOTES':
+        searchState.openedTag = null;
+        searchState.showTrash = false;
+        searchState.showUntagged = true;
         return next(withSearch(action));
 
       case 'SEARCH':

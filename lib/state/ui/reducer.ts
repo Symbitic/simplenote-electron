@@ -120,6 +120,7 @@ const editingTags: A.Reducer<boolean> = (state = false, action) => {
     case 'OPEN_TAG':
     case 'SELECT_TRASH':
     case 'SHOW_ALL_NOTES':
+    case 'SHOW_UNTAGGED_NOTES':
     case 'NAVIGATION_TOGGLE':
       return false;
     default:
@@ -196,11 +197,26 @@ const openedTag: A.Reducer<T.TagHash | null> = (state = null, action) => {
   switch (action.type) {
     case 'SELECT_TRASH':
     case 'SHOW_ALL_NOTES':
+    case 'SHOW_UNTAGGED_NOTES':
       return null;
     case 'OPEN_TAG':
       return tagHashOf(action.tagName);
     case 'TRASH_TAG':
       return tagHashOf(action.tagName) === state ? null : state;
+    default:
+      return state;
+  }
+};
+
+const showUntaggedNotes: A.Reducer<boolean> = (state = false, action) => {
+  switch (action.type) {
+    case 'SHOW_UNTAGGED_NOTES':
+      return true;
+    case 'SELECT_TRASH':
+    case 'SHOW_ALL_NOTES':
+    case 'OPEN_TAG':
+    case 'TRASH_TAG':
+      return false;
     default:
       return state;
   }
@@ -272,6 +288,7 @@ const showNavigation: A.Reducer<boolean> = (state = false, action) => {
     case 'OPEN_TAG':
     case 'SELECT_TRASH':
     case 'SHOW_ALL_NOTES':
+    case 'SHOW_UNTAGGED_NOTES':
       return false;
     case 'SHOW_DIALOG':
       if (action.dialog === 'SETTINGS') {
@@ -304,6 +321,7 @@ const showTrash: A.Reducer<boolean> = (state = false, action) => {
       return true;
     case 'CREATE_NOTE_WITH_ID':
     case 'OPEN_TAG':
+    case 'SHOW_UNTAGGED_NOTES':
     case 'SHOW_ALL_NOTES': {
       return false;
     }
@@ -340,6 +358,7 @@ export default combineReducers({
   showNoteInfo,
   showNoteList,
   showRevisions,
+  showUntaggedNotes,
   showTrash,
   simperiumConnected,
   tagSuggestions,

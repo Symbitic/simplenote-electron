@@ -27,6 +27,7 @@ type StateProps = {
   openedTag: T.Tag | null;
   searchQuery: string;
   showTrash: boolean;
+  showUntaggedNotes: boolean;
 };
 
 type DispatchProps = {
@@ -41,10 +42,13 @@ export const MenuBar: FunctionComponent<Props> = ({
   openedTag,
   searchQuery,
   showTrash,
+  showUntaggedNotes,
   toggleNavigation,
 }) => {
   const placeholder = showTrash
     ? 'Trash'
+    : showUntaggedNotes
+    ? 'Untagged Notes'
     : openedTag
     ? 'Notes With Selected Tag'
     : 'All Notes';
@@ -69,11 +73,12 @@ export const MenuBar: FunctionComponent<Props> = ({
 
 const mapStateToProps: S.MapState<StateProps> = ({
   data,
-  ui: { openedTag, searchQuery, showTrash },
+  ui: { openedTag, searchQuery, showTrash, showUntaggedNotes },
 }) => ({
   openedTag: openedTag ? data.tags.get(openedTag) ?? null : null,
   searchQuery,
   showTrash,
+  showUntaggedNotes,
 });
 
 const mapDispatchToProps: S.MapDispatch<DispatchProps, OwnProps> = (

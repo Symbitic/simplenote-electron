@@ -20,6 +20,7 @@ type StateProps = {
   openedTag: T.TagEntity | null;
   showNavigation: boolean;
   showTrash: boolean;
+  showUntaggedNotes: boolean;
 };
 
 type DispatchProps = {
@@ -27,6 +28,7 @@ type DispatchProps = {
   onOutsideClick: () => any;
   onSettings: () => any;
   onShowAllNotes: () => any;
+  onShowUntaggedNotes: () => any;
   selectTrash: () => any;
   showKeyboardShortcuts: () => any;
 };
@@ -56,18 +58,41 @@ export class NavigationBar extends Component<Props> {
   };
 
   // Determine if the selected class should be applied for the 'all notes' or 'trash' rows
-  isSelected = ({ isTrashRow }: { isTrashRow: boolean }) => {
-    const { showTrash, openedTag } = this.props;
-    const isItemSelected = isTrashRow === showTrash;
+  isSelected = ({ row }: { row: string }) => {
+    const { showUntaggedNotes, showTrash, openedTag } = this.props;
 
-    return isItemSelected && !openedTag;
+    if (openedTag) {
+      return false;
+    }
+
+    const isAllSelected = row === 'all';
+    const isTrashSelected = showTrash && row === 'trash';
+    const isUntaggedSelected = showUntaggedNotes && row === 'untagged';
+
+    if (isTrashSelected || isUntaggedSelected) {
+      return true;
+    }
+
+    return isAllSelected && !showTrash && !showUntaggedNotes;
   };
 
   render() {
-    const { autoHideMenuBar, onAbout, onSettings, onShowAllNotes } = this.props;
+    const {
+      autoHideMenuBar,
+      onAbout,
+      onSettings,
+      onShowAllNotes,
+      onShowUntaggedNotes,
+    } = this.props;
     return (
       <div className="navigation-bar theme-color-bg theme-color-fg theme-color-border">
         <div className="navigation-bar__folders theme-color-border">
+          <NavigationBarItem
+            icon={<NotesIcon />}
+            isSelected={this.isSelected({ row: 'untagged' })}
+            label="Untagged Notes"
+            onClick={onShowUntaggedNotes}
+          />
           <NavigationBarItem
             icon={<SettingsIcon />}
             label="Settings"
@@ -75,13 +100,13 @@ export class NavigationBar extends Component<Props> {
           />
           <NavigationBarItem
             icon={<TrashIcon />}
-            isSelected={this.isSelected({ isTrashRow: true })}
+            isSelected={this.isSelected({ row: 'trash' })}
             label="Trash"
             onClick={this.onSelectTrash}
           />
           <NavigationBarItem
             icon={<NotesIcon />}
-            isSelected={this.isSelected({ isTrashRow: false })}
+            isSelected={this.isSelected({ row: 'all' })}
             label="All Notes"
             onClick={onShowAllNotes}
           />
@@ -126,19 +151,21 @@ export class NavigationBar extends Component<Props> {
 
 const mapStateToProps: S.MapState<StateProps> = ({
   settings,
-  ui: { dialogs, openedTag, showNavigation, showTrash },
+  ui: { dialogs, openedTag, showNavigation, showTrash, showUntaggedNotes },
 }) => ({
   autoHideMenuBar: settings.autoHideMenuBar,
   isDialogOpen: dialogs.length > 0,
   openedTag,
   showNavigation,
   showTrash,
+  showUntaggedNotes,
 });
 
 const mapDispatchToProps: S.MapDispatch<DispatchProps> = {
   onAbout: () => actions.ui.showDialog('ABOUT'),
   onOutsideClick: actions.ui.toggleNavigation,
   onShowAllNotes: actions.ui.showAllNotes,
+  onShowUntaggedNotes: actions.ui.showUntaggedNotes,
   onSettings: () => actions.ui.showDialog('SETTINGS'),
   selectTrash: actions.ui.selectTrash,
   showKeyboardShortcuts: () => actions.ui.showDialog('KEYBINDINGS'),
