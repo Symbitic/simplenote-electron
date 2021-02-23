@@ -1,5 +1,15 @@
 # Changelog
 
+## [v2.7.0]
+
+### Enhancements
+
+- Added Untagged Notes filter to sidebar.
+
+### Fixes
+
+- Fixed bug where selecting Trash filter and then filtering on a tag resulted in a filter where only notes with that tag in the Trash were shown.
+
 ## [v2.6.0]
 
 ### Enhancements
