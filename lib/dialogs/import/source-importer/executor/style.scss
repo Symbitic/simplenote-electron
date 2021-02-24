@@ -9,8 +9,21 @@
   flex: 1 0 auto;
   padding-top: 2em;
 
+  .panel-title {
+    text-transform: none;
+    font-weight: normal;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
   label {
     display: flex;
+    border-top: 1px solid $studio-gray-5;
+    border-bottom: 1px solid $studio-gray-5;
+    vertical-align: middle;
+    height: 28px;
+    line-height: 28px;
+    font-size: 16px;
   }
 
   .enable-markdown {
@@ -19,6 +32,7 @@
 
   .toggle-control {
     flex: none;
+    margin-top: 6px;
   }
 }
 
