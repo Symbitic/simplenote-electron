@@ -78,6 +78,14 @@
       ul {
         border-color: $studio-gray-80;
       }
+
+      li {
+        color: $studio-white;
+      }
+
+      svg {
+        fill: $studio-gray-30;
+      }
     }
   }
 }
