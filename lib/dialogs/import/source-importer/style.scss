@@ -8,6 +8,8 @@
 .source-importer {
   button.disabled {
     margin: 24px 24px 24px auto;
+    border-radius: 4px;
+    padding: 4px 12px;
   }
 
   .importer-dropzone {
@@ -49,5 +51,16 @@
   }
   .source-importer-executor__button button {
     margin: 24px 24px 24px auto;
+  }
+}
+
+.theme-dark {
+  .source-importer {
+    p.theme-color-fg-dim {
+      color: $studio-white;
+    }
+    button.disabled {
+      background-color: $studio-gray-50;
+    }
   }
 }

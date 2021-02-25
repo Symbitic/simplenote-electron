@@ -9,14 +9,11 @@
   transition: padding 0.2s ease-out, background 0.2s ease-out;
   text-align: center;
   color: $studio-gray-80;
+  background-color: transparent;
 
   &:focus-within {
     overflow: hidden;
     outline: none;
-  }
-
-  @at-root .theme-dark & {
-    background: $studio-gray-70;
   }
 
   &.is-active {
@@ -69,4 +66,18 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.theme-dark {
+  .importer-dropzone.theme-color-border {
+    border-color: $studio-gray-50;
+    color: $studio-gray-30;
+  }
+  .importer-dropzone {
+    &.is-accepted {
+      ul {
+        border-color: $studio-gray-80;
+      }
+    }
+  }
 }

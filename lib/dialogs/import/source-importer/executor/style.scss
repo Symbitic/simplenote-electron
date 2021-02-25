@@ -32,13 +32,14 @@
     border-top: 1px solid $studio-gray-5;
     border-bottom: 1px solid $studio-gray-5;
     vertical-align: middle;
+    font-size: 16px;
     height: 28px;
     line-height: 28px;
-    font-size: 16px;
   }
 
   .enable-markdown {
     flex: 1 1 auto;
+    line-height: 28px;
   }
 
   .toggle-control {
@@ -57,5 +58,15 @@
   button {
     display: block;
     margin: 30px 0 0 auto;
+  }
+}
+
+.theme-dark {
+  .source-importer-executor {
+    .source-importer-executor__options {
+      label {
+        border-color: $studio-gray-80;
+      }
+    }
   }
 }
